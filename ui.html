@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    :root {
+      /* Figma Design System Colors */
+      --figma-color-bg: var(--figma-color-bg-secondary);
+      --figma-color-text: var(--figma-color-text);
+      --figma-color-border: var(--figma-color-border);
+      --figma-color-primary: var(--figma-color-bg-brand);
+      --figma-color-hover: var(--figma-color-bg-brand-hover);
+      --figma-color-pressed: var(--figma-color-bg-brand-pressed);
+      --figma-color-disabled: var(--figma-color-bg-disabled);
+      --figma-color-danger: var(--figma-color-bg-danger);
+      --figma-color-success: var(--figma-color-bg-success);
+      
+      /* Spacing */
+      --space-xxs: 4px;
+      --space-xs: 8px;
+      --space-sm: 12px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 11px;
+      line-height: 16px;
+      margin: 0;
+      background: var(--figma-color-bg);
+      color: var(--figma-color-text);
+    }
+
+    .plugin-container {
+      padding: var(--space-md);
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .section {
+      margin-bottom: var(--space-lg);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--space-sm);
+    }
+
+    .section-title {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.005em;
+      color: var(--figma-color-text);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-sm);
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: var(--space-xxs);
+      font-weight: 500;
+      font-size: 11px;
+      color: var(--figma-color-text);
+    }
+
+    .input-field {
+      width: 100%;
+      padding: var(--space-xs);
+      font-size: 11px;
+      line-height: 16px;
+      border: 1px solid var(--figma-color-border);
+      border-radius: 2px;
+      background: var(--figma-color-bg);
+      color: var(--figma-color-text);
+      transition: border-color 0.2s ease;
+    }
+
+    .input-field:hover {
+      border-color: var(--figma-color-border-hover);
+    }
+
+    .input-field:focus {
+      border-color: var(--figma-color-border-selected);
+      outline: none;
+    }
+
+    textarea.input-field {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .dynamic-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .list-item {
+      display: flex;
+      gap: var(--space-xs);
+    }
+
+    .list-item .input-field {
+      flex: 1;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xs) var(--space-sm);
+      font-size: 11px;
+      font-weight: 500;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .button-primary {
+      background: var(--figma-color-primary);
+      color: white;
+    }
+
+    .button-primary:hover {
+      background: var(--figma-color-hover);
+    }
+
+    .button-primary:active {
+      background: var(--figma-color-pressed);
+    }
+
+    .button-secondary {
+      background: transparent;
+      border: 1px solid var(--figma-color-border);
+      color: var(--figma-color-text);
+    }
+
+    .button-secondary:hover {
+      background: var(--figma-color-bg-hover);
+    }
+
+    .button-icon {
+      padding: var(--space-xxs);
+      border-radius: 4px;
+      min-width: 24px;
+      height: 24px;
+    }
+
+    .status-message {
+      margin-top: var(--space-md);
+      padding: var(--space-sm);
+      border-radius: 6px;
+      font-size: 11px;
+      display: none;
+    }
+
+    .status-message.error {
+      background: var(--figma-color-danger);
+      color: white;
+    }
+
+    .status-message.success {
+      background: var(--figma-color-success);
+      color: white;
+    }
+
+    .status-message.loading {
+      background: var(--figma-color-bg-hover);
+      color: var(--figma-color-text);
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--figma-color-border);
+      margin: var(--space-lg) 0;
+    }
+
+    .icon {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+  </style>
+</head>
+<body>
+  <div class="plugin-container">
+    <form id="caseStudyForm">
+      <div class="section">
+        <div class="section-header">
+          <h2 class="section-title">Project Details</h2>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="title">Project Title</label>
+          <input type="text" id="title" class="input-field" required placeholder="Enter project title">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="description">Project Description</label>
+          <textarea id="description" class="input-field" required placeholder="Brief description of the project"></textarea>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section">
+        <div class="section-header">
+          <h2 class="section-title">Case Study Content</h2>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="overview">Overview</label>
+          <textarea id="overview" class="input-field" required placeholder="High-level overview of the project"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="challenge">Challenge</label>
+          <textarea id="challenge" class="input-field" required placeholder="What problems were you solving?"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="solution">Solution</label>
+          <textarea id="solution" class="input-field" required placeholder="How did you solve these problems?"></textarea>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section">
+        <div class="section-header">
+          <h2 class="section-title">Process Steps</h2>
+        </div>
+        <div id="processSteps" class="dynamic-list">
+          <div class="list-item">
+            <input type="text" class="input-field" placeholder="Add a process step">
+            <button type="button" class="button button-secondary button-icon" onclick="addProcessStep()">
+              <svg class="icon" viewBox="0 0 16 16">
+                <path d="M8 2a1 1 0 0 1 1 1v4h4a1 1 0 1 1 0 2H9v4a1 1 0 1 1-2 0V9H3a1 1 0 1 1 0-2h4V3a1 1 0 0 1 1-1z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <h2 class="section-title">Outcomes</h2>
+        </div>
+        <div id="outcomes" class="dynamic-list">
+          <div class="list-item">
+            <input type="text" class="input-field" placeholder="Add an outcome">
+            <button type="button" class="button button-secondary button-icon" onclick="addOutcome()">
+              <svg class="icon" viewBox="0 0 16 16">
+                <path d="M8 2a1 1 0 0 1 1 1v4h4a1 1 0 1 1 0 2H9v4a1 1 0 1 1-2 0V9H3a1 1 0 1 1 0-2h4V3a1 1 0 0 1 1-1z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="button button-primary" style="width: 100%">
+        Generate Case Study
+      </button>
+    </form>
+
+    <div id="status" class="status-message"></div>
+  </div>
+
+  <script>
+    function addProcessStep() {
+      const container = document.getElementById('processSteps');
+      const item = document.createElement('div');
+      item.className = 'list-item';
+      item.innerHTML = `
+        <input type="text" class="input-field" placeholder="Add a process step">
+        <button type="button" class="button button-secondary button-icon" onclick="removeItem(this)">
+          <svg class="icon" viewBox="0 0 16 16">
+            <path d="M3 8a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1z"/>
+          </svg>
+        </button>
+      `;
+      container.appendChild(item);
+    }
+
+    function addOutcome() {
+      const container = document.getElementById('outcomes');
+      const item = document.createElement('div');
+      item.className = 'list-item';
+      item.innerHTML = `
+        <input type="text" class="input-field" placeholder="Add an outcome">
+        <button type="button" class="button button-secondary button-icon" onclick="removeItem(this)">
+          <svg class="icon" viewBox="0 0 16 16">
+            <path d="M3 8a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1z"/>
+          </svg>
+        </button>
+      `;
+      container.appendChild(item);
+    }
+
+    function removeItem(button) {
+      button.closest('.list-item').remove();
+    }
+
+    function showStatus(message, type) {
+      const status = document.getElementById('status');
+      status.textContent = message;
+      status.className = `status-message ${type}`;
+      status.style.display = 'block';
+    }
+
+    document.getElementById('caseStudyForm').onsubmit = (e) => {
+      e.preventDefault();
+      
+      const processSteps = Array.from(
+        document.querySelectorAll('#processSteps input')
+      ).map(input => input.value).filter(Boolean);
+
+      const outcomes = Array.from(
+        document.querySelectorAll('#outcomes input')
+      ).map(input => input.value).filter(Boolean);
+
+      parent.postMessage({
+        pluginMessage: {
+          type: 'generate-case-study',
+          title: document.getElementById('title').value,
+          description: document.getElementById('description').value,
+          overview: document.getElementById('overview').value,
+          challenge: document.getElementById('challenge').value,
+          solution: document.getElementById('solution').value,
+          process: processSteps,
+          outcomes: outcomes
+        }
+      }, '*');
+    };
+
+    window.onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      
+      if (msg.type === 'error') {
+        showStatus(msg.message, 'error');
+      } else if (msg.type === 'success') {
+        showStatus(msg.message, 'success');
+      } else if (msg.type === 'loading') {
+        showStatus(msg.message, 'loading');
+      }
+    };
+  </script>
+</body>
+</html>
